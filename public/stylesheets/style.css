@@ -1,8 +1,61 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+/*
+ *
+ * Base menu styles
+ *
+ */
+
+.home-menu {
+    padding: 0.5em;
+    text-align: center;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.10);
 }
 
-a {
-  color: #00B7FF;
+.home-menu {
+    background: #2d3e50;
+}
+
+.pure-menu.pure-menu-fixed {
+    /* Fixed menus normally have a border at the bottom. */
+    border-bottom: none;
+    /* I need a higher z-index here because of the scroll-over effect. */
+    z-index: 4;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+    font-weight: 400;
+    font-size: 120%;
+}
+
+.home-menu .pure-menu-selected a {
+    color: white;
+}
+
+.home-menu a {
+    color: #6FBEF3;
+}
+
+.home-menu li a:hover, .home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #AECFE5;
+}
+
+/*
+ *
+ * Base content styles
+ *
+ */
+
+.content-wrapper {
+    /* These styles are required for the "scroll-over" effect */
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    min-height: 12%;
+    z-index: 2;
+}
+
+.content {
+    padding: 1em;
 }
