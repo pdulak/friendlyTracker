@@ -14,6 +14,30 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+app.set('executionsThisTime',0);
+
+app.use(function(req,res,next) {
+    var executions = req.app.get('executionsThisTime');
+    app.set('executionsThisTime',++executions);
+    console.log('on Request Start?');
+    next();
+})
+
+app.use(function (req, res, next) {
+    function afterResponse() {
+        var executions = req.app.get('executionsThisTime');
+        res.removeListener('finish', afterResponse);
+        res.removeListener('close', afterResponse);
+
+        console.log('on Request End?');
+        console.log('Executed ' + executions + ' times');
+    }
+
+    res.on('finish', afterResponse);
+    res.on('close', afterResponse);
+
+    next();
+});
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -35,6 +59,7 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+
 
 // error handler
 app.use(function(err, req, res, next) {

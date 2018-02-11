@@ -11,9 +11,15 @@ router.get('/about', function(req, res, next) {
     var d = new Date();
     var viewData = {
         year: d.getFullYear(),
-        testVariable: 'test value changed again'
+        testVariable: 'User Agent: ' + req.headers['user-agent'],
     };
+    req.zzzpdulakData = {
+        testValue : true,
+        testVal : false,
+    }
+    // console.log(req);
     res.render('about', viewData);
+    // console.log(res);
 });
 
 module.exports = router;
