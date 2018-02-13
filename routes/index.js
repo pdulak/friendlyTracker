@@ -12,6 +12,7 @@ router.get('/about', function(req, res, next) {
     var viewData = {
         year: d.getFullYear(),
         testVariable: 'User Agent: ' + req.headers['user-agent'],
+        title: 'About us page'
     };
     req.zzzpdulakData = {
         testValue : true,
