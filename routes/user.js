@@ -4,8 +4,8 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     var viewData = {
-        title: 'Main users page',
-        userContents: 'This is main users page - it should use different layout',
+        title: 'Main user page',
+        userContents: 'This is main user page - it should use different layout',
         layout: 'layout_user'
     }
     res.render('userMain', viewData);

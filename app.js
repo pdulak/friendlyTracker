@@ -6,7 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
-var users = require('./routes/users');
+var user = require('./routes/user');
 var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 
@@ -62,9 +62,10 @@ app.use(function (req, res, next) {
 
 // generate menu of the application
 app.use(tools.generateMenu());
+app.use('/user',tools.generateUserMenu());
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/user', user);
 app.use('/siteAdmin', siteAdmin);
 
 // catch 404 and forward to error handler
