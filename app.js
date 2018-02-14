@@ -1,30 +1,35 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');
+var logger = require('morgan');var hbs = require('hbs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var hbs = require('hbs');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
 var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 
-var hbs = require('hbs');
-
 var app = express();
 
+//
+// Handlebars / HBS setup and configuration
+//
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 // partials will be stored in /views/partials
 hbs.registerPartials(__dirname + '/views/partials');
 // expose response locals and app locals to the templating system
 hbs.localsAsTemplateData(app);
 
+//
+// App level variables initialization
+//
 // value to play with on request start and end
-app.set('executionsThisTime',0);
+app.set('executionsThisTime', 0);
+tools.setApp(app);
 
 
 // uncomment after placing your favicon in /public
@@ -37,37 +42,26 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//
+// General toolset
+//
 // on request start and on request end moved after static content
-app.use(function(req,res,next) {
-    var executions = req.app.get('executionsThisTime');
-    app.set('executionsThisTime',++executions);
-
-    next();
-})
-
-app.use(function (req, res, next) {
-    function afterResponse() {
-        var executions = req.app.get('executionsThisTime');
-        res.removeListener('finish', afterResponse);
-        res.removeListener('close', afterResponse);
-
-        console.log('Executed ' + executions + ' times');
-    }
-
-    res.on('finish', afterResponse);
-    res.on('close', afterResponse);
-
-    next();
-});
-
+app.use(tools.onRequestStart);
+app.use(tools.onRequestEnd);
 // generate menu of the application
-app.use(tools.generateMenu());
-app.use('/user',tools.generateUserMenu());
+app.use(tools.generateMainMenu);
+app.use('/user', tools.generateUserMenu);
 
+//
+// routing
+//
 app.use('/', index);
 app.use('/user', user);
 app.use('/siteAdmin', siteAdmin);
 
+//
+// error handling
+//
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
