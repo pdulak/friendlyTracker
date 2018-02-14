@@ -1,7 +1,7 @@
-<ul class="pure-menu-list">
+<ul>
     {{#each menuItems}}
-        <li class="pure-menu-item {{ class }}">
-            <a href="{{ href }}" class="pure-menu-link">{{ label }}</a>
+        <li class="{{ class }}">
+            <a href="{{ href }}">{{ label }}</a>
             {{#if menuItems}}
                 {{> menuList}}
             {{/if}}

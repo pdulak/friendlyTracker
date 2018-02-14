@@ -80,18 +80,14 @@ exports.generateMainMenu = function(req, res, next) {
                 menuItems: [{
                     label: 'CEO',
                     href: '/aboutCEO'
-                },{
+                }, {
                     label: 'Link to Google',
                     href: 'https://google.com/'
-                }
-                ]
-            },{
+                }]
+            }, {
                 label: 'About our building',
                 href: '/aboutbuilding'
             }]
-        }, {
-            label: 'Users',
-            href: '/user'
         }, {
             label: 'Admin',
             href: '/siteAdmin'
@@ -99,26 +95,15 @@ exports.generateMainMenu = function(req, res, next) {
             label: 'Page with error',
             href: '/siteAdmin/thisIsNotWorking'
         }, {
-            label: 'Empty',
-            href: '#'
+            label: 'Users',
+            href: '/user'
         }
 
     ]
-    adjustMenuClass(menuItems,req._parsedUrl.pathname);
+    adjustMenuClass(menuItems, req._parsedUrl.pathname);
     res.locals.menuItems = menuItems;
     next();
 };
-
-function adjustMenuClass(menuItems,pathname) {
-    for (var item in menuItems) {
-        if (menuItems[item].href == pathname) {
-            menuItems[item].class = 'pure-menu-selected';
-        }
-        if (menuItems[item].menuItems) {
-            adjustMenuClass(menuItems[item].menuItems,pathname)
-        }
-    }
-}
 
 /**
  * Generates the menu for user area.
@@ -132,18 +117,24 @@ exports.generateUserMenu = function(req, res, next) {
             href: '/'
         }, {
             label: 'My profile',
-            href: '/user'
+            href: '/user',
+            menuItems: [
+                {
+                    label: 'My Address',
+                    href: '/user/address'
+                },
+                {
+                    label: 'My Billing Info',
+                    href: '/user/billingInfo'
+                }
+            ]
         }, {
             label: 'Empty',
             href: '#'
         }
 
     ]
-    for (var item in menuItems) {
-        if (menuItems[item].href == req._parsedUrl.pathname) {
-            menuItems[item].class = 'pure-menu-selected';
-        }
-    }
+    adjustMenuClass(menuItems, req._parsedUrl.pathname);
     res.locals.menuItems = menuItems;
     next();
 };
@@ -158,4 +149,21 @@ exports.testFunction = function(req, res, next) {
     console.log('This one is a test only');
     console.log(req);
     next();
+}
+
+/**
+ * highlight proper menu item.
+ *
+ * @private
+ */
+
+function adjustMenuClass(menuItems, pathname) {
+    for (var item in menuItems) {
+        if (menuItems[item].href == pathname) {
+            menuItems[item].class = 'menu-selected';
+        }
+        if (menuItems[item].menuItems) {
+            adjustMenuClass(menuItems[item].menuItems, pathname)
+        }
+    }
 }
