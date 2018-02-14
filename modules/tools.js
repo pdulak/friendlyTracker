@@ -73,7 +73,22 @@ exports.generateMainMenu = function(req, res, next) {
             href: '/'
         }, {
             label: 'About',
-            href: '/about'
+            href: '/about',
+            menuItems: [{
+                label: 'About our staff',
+                href: '/aboutstaff',
+                menuItems: [{
+                    label: 'CEO',
+                    href: '/aboutCEO'
+                },{
+                    label: 'Link to Google',
+                    href: 'https://google.com/'
+                }
+                ]
+            },{
+                label: 'About our building',
+                href: '/aboutbuilding'
+            }]
         }, {
             label: 'Users',
             href: '/user'
@@ -89,14 +104,21 @@ exports.generateMainMenu = function(req, res, next) {
         }
 
     ]
-    for (var item in menuItems) {
-        if (menuItems[item].href == req._parsedUrl.pathname) {
-            menuItems[item].class = 'pure-menu-selected';
-        }
-    }
+    adjustMenuClass(menuItems,req._parsedUrl.pathname);
     res.locals.menuItems = menuItems;
     next();
 };
+
+function adjustMenuClass(menuItems,pathname) {
+    for (var item in menuItems) {
+        if (menuItems[item].href == pathname) {
+            menuItems[item].class = 'pure-menu-selected';
+        }
+        if (menuItems[item].menuItems) {
+            adjustMenuClass(menuItems[item].menuItems,pathname)
+        }
+    }
+}
 
 /**
  * Generates the menu for user area.

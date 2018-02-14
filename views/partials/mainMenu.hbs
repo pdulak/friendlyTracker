@@ -1,9 +1,4 @@
 <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-    <a class="pure-menu-heading" href="">LooserTracker</a>
-
-    <ul class="pure-menu-list">
-        {{#each menuItems}}
-            <li class="pure-menu-item {{ class }}"><a href="{{ href }}" class="pure-menu-link">{{ label }}</a></li>
-        {{/each}}
-    </ul>
+    <a class="pure-menu-heading" href="">LooserTracker</a> 
+    {{> menuList}}
 </div>

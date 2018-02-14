@@ -1,0 +1,10 @@
+<ul class="pure-menu-list">
+    {{#each menuItems}}
+        <li class="pure-menu-item {{ class }}">
+            <a href="{{ href }}" class="pure-menu-link">{{ label }}</a>
+            {{#if menuItems}}
+                {{> menuList}}
+            {{/if}}
+        </li>
+    {{/each}}
+</ul>
