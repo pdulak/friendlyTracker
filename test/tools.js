@@ -1,4 +1,5 @@
 var httpMocks = require('node-mocks-http');
+var expect = require('chai').expect;
 var tools = require('../modules/tools');
 
 // tests against tools module
@@ -6,7 +7,7 @@ var tools = require('../modules/tools');
 describe('/modules/tools.js ', function() {
 
     describe('generateMainMenu', function() {
-        it('should generate non-empty res.locals.menuItems array', function(done) {
+        it('should generate non-empty res.locals.menuItems array', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/siteAdmin"
@@ -15,20 +16,11 @@ describe('/modules/tools.js ', function() {
             var res = httpMocks.createResponse();
             var next = function() {};
 
-            // call the actual function
             tools.generateMainMenu(req, res, next);
-
-            if ((res.locals.menuItems instanceof Array) && (res.locals.menuItems.length > 0)) {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("menuItems array not created properly"));
-            }
-
+            expect(res.locals.menuItems).to.be.a('Array').with.lengthOf.above(1);
         });
 
-        it('should generate Main Menu (contains About Us page)', function(done) {
+        it('should generate Main Menu (contains About Us page)', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/siteAdmin"
@@ -38,17 +30,12 @@ describe('/modules/tools.js ', function() {
             var next = function() {};
 
             tools.generateMainMenu(req, res, next);
-
-            if (res.locals.menuItems.find(x => x.label === 'About Us')) {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("menuItems array does not contain About Us page"));
-            }
+            expect(res.locals.menuItems[1]).to.deep.include({
+                label: 'About Us'
+            });
         })
 
-        it('should highlight proper menu item', function(done) {
+        it('should highlight proper menu item', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/siteAdmin"
@@ -57,22 +44,13 @@ describe('/modules/tools.js ', function() {
             var res = httpMocks.createResponse();
             var next = function() {};
 
-            // call the actual function
             tools.generateMainMenu(req, res, next);
-
-            if (res.locals.menuItems[2].class == 'menu-selected') {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("Proper menu item not selected"));
-            }
-
+            expect(res.locals.menuItems[2].class).to.equal('menu-selected');
         });
     })
 
     describe('generateUserMenu', function() {
-        it('should generate non-empty res.locals.menuItems array', function(done) {
+        it('should generate non-empty res.locals.menuItems array', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/user"
@@ -81,20 +59,11 @@ describe('/modules/tools.js ', function() {
             var res = httpMocks.createResponse();
             var next = function() {};
 
-            // call the actual function
             tools.generateUserMenu(req, res, next);
-
-            if ((res.locals.menuItems instanceof Array) && (res.locals.menuItems.length > 0)) {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("menuItems array not created properly"));
-            }
-
+            expect(res.locals.menuItems).to.be.a('Array').with.lengthOf.above(1);
         });
 
-        it('should generate User Menu (contains My profile page)', function(done) {
+        it('should generate User Menu (contains My profile page)', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/user"
@@ -104,17 +73,12 @@ describe('/modules/tools.js ', function() {
             var next = function() {};
 
             tools.generateUserMenu(req, res, next);
-
-            if (res.locals.menuItems.find(x => x.label === 'My profile')) {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("menuItems array does not contain My profile page"));
-            }
+            expect(res.locals.menuItems[1]).to.deep.include({
+                label: 'My profile'
+            });
         })
 
-        it('should highlight proper menu item', function(done) {
+        it('should highlight proper menu item', function() {
             var req = httpMocks.createRequest({
                 _parsedUrl: {
                     pathname: "/user"
@@ -123,22 +87,13 @@ describe('/modules/tools.js ', function() {
             var res = httpMocks.createResponse();
             var next = function() {};
 
-            // call the actual function
             tools.generateUserMenu(req, res, next);
-
-            if (res.locals.menuItems[1].class == 'menu-selected') {
-                // If the behavior is as expected, call done with no argument.
-                done();
-            } else {
-                // Otherwise, call done with an error.
-                done(new Error("Proper menu item not selected"));
-            }
-
+            expect(res.locals.menuItems[1].class).to.equal('menu-selected');
         });
     })
 
     describe('onRequestStart', function() {
-        it('should increment executionsThisTime application variable', function(done) {
+        it('should increment executionsThisTime application variable', function() {
             var req = httpMocks.createRequest({
                 app: {
                     get: function(nameOfVariable) {
@@ -154,16 +109,12 @@ describe('/modules/tools.js ', function() {
             var next = function() {};
 
             tools.onRequestStart(req, res, next);
-            if (req.app.executionsThisTime == 5) {
-                done();
-            } else {
-                done(new Error("the value of executionsThisTime is: " + req.app.executionsThisTime))
-            }
+            expect(req.app.executionsThisTime).to.equal(5);
         })
     })
 
     describe('onRequestEnd', function() {
-        it('should register function on finish and close events in res object', function(done) {
+        it('should register function on finish and close events in res object', function() {
             var req = httpMocks.createRequest();
             var res = {
                 on: function(nameOfVariable, valueOfVariable) {
@@ -173,11 +124,8 @@ describe('/modules/tools.js ', function() {
             var next = function() {};
 
             tools.onRequestEnd(req, res, next);
-            if ((res.finish instanceof Function) && (res.close instanceof Function)) {
-                done();
-            } else {
-                done(new Error("The values are not properly set: " + res.finish + " and " + res.close))
-            }
+            expect(res.finish).to.be.a('Function');
+            expect(res.close).to.be.a('Function');
         })
     })
 
