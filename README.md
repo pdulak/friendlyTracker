@@ -25,6 +25,8 @@ Things I learned so far:
 + how to pass response locals and application locals to handlebars
 + how to generate menu using module and how to highlight current page using request variables
 + how to create node module and how function calls works in such module
++ how to use partials in handlebars and how to call them even recursively
++ how to test parts of my application using mocha
 
 Things to review / read / check:
 ----------
