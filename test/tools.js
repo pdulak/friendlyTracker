@@ -156,4 +156,21 @@ describe('/modules/tools.js ', function() {
         }
     })
 
+    it('onRequestEnd should register function on finish and close events in res object', function(done) {
+        var req = httpMocks.createRequest();
+        var res = {
+            on: function(nameOfVariable, valueOfVariable) {
+                this[nameOfVariable] = valueOfVariable;
+            }
+        };
+        var next = function() {};
+
+        tools.onRequestEnd(req, res, next);
+        if ((res.finish instanceof Function) && (res.close instanceof Function)) {
+            done();
+        } else {
+            done(new Error("The values are not properly set: " + res.finish + " and " + res.close))
+        }
+    })
+
 });
