@@ -6,9 +6,16 @@ router.get('/', function(req, res, next) {
     var viewData = {
         title: 'Main user page',
         userContents: 'This is main user page - it should use different layout',
-        layout: 'layout_user'
     }
     res.render('userMain', viewData);
 });
+
+router.get('/address', function(req,res,next) {
+    res.render('userAddress');
+})
+
+router.get('/billingInfo', function(req,res,next) {
+    res.render('userBilling');
+})
 
 module.exports = router;

@@ -1,7 +1,8 @@
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
-var logger = require('morgan');var hbs = require('hbs');
+var logger = require('morgan');
+var hbs = require('hbs');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
@@ -56,6 +57,10 @@ app.use('/user', tools.generateUserMenu);
 // routing
 //
 app.use('/', index);
+app.use('/user', function(req, res, next) {
+    res.locals.layout = 'layout_user';
+    next();
+});
 app.use('/user', user);
 app.use('/siteAdmin', siteAdmin);
 
