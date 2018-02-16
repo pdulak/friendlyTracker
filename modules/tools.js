@@ -72,7 +72,7 @@ exports.generateMainMenu = function(req, res, next) {
             label: 'Home',
             href: '/'
         }, {
-            label: 'About',
+            label: 'About Us',
             href: '/about',
             menuItems: [{
                 label: 'About our staff',
