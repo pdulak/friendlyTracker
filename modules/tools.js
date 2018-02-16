@@ -15,18 +15,6 @@ var exports = module.exports = {};
  * @private
  */
 
-var app;
-
-/**
- * App value setter.
- *
- * @public
- */
-
-exports.setApp = function(appValue) {
-    app = appValue;
-}
-
 /**
  * Handles request start actions.
  *
@@ -35,7 +23,7 @@ exports.setApp = function(appValue) {
 
 exports.onRequestStart = function(req, res, next) {
     var executions = req.app.get('executionsThisTime');
-    app.set('executionsThisTime', ++executions);
+    req.app.set('executionsThisTime', ++executions);
 
     next();
 }
@@ -118,8 +106,7 @@ exports.generateUserMenu = function(req, res, next) {
         }, {
             label: 'My profile',
             href: '/user',
-            menuItems: [
-                {
+            menuItems: [{
                     label: 'My Address',
                     href: '/user/address'
                 },

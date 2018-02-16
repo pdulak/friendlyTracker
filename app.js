@@ -30,8 +30,6 @@ hbs.localsAsTemplateData(app);
 //
 // value to play with on request start and end
 app.set('executionsThisTime', 0);
-tools.setApp(app);
-
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
