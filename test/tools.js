@@ -133,4 +133,27 @@ describe('/modules/tools.js ', function() {
 
     });
 
+    it('onRequestStart should increment executionsThisTime application variable', function(done) {
+        var req = httpMocks.createRequest({
+            app: {
+                get: function(nameOfVariable) {
+                    return this[nameOfVariable];
+                },
+                set: function(nameOfVariable, valueOfVariable) {
+                    this[nameOfVariable] = valueOfVariable;
+                },
+                executionsThisTime: 4
+            }
+        });
+        var res = httpMocks.createResponse();
+        var next = function() {};
+
+        tools.onRequestStart(req, res, next);
+        if (req.app.executionsThisTime == 5) {
+            done();
+        } else {
+            done(new Error("the value of executionsThisTime is: " + req.app.executionsThisTime))
+        }
+    })
+
 });
