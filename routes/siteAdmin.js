@@ -15,15 +15,21 @@ router.get('/setup', function(req, res, next) {
     var con = new Sequelize(cfg.db.database, cfg.db.username, cfg.db.password, cfg.db.sequelizeParams);
 
     var dbVersion = con.define('dbVersion', {
-        version: Sequelize.SYMBOL
+        version: Sequelize.STRING
     });
 
     con.sync().then(function() {
-            dbVersion.create({
-                version: '20180313-01'
-            })
-        }
-    );
+        dbVersion.findAll().then(function(data) {
+            console.log(data);
+        });
+    });
+
+    // con.sync().then(function() {
+    //         dbVersion.create({
+    //             version: '20180313-01'
+    //         })
+    //     }
+    // );
 
     var viewData = {
         title: 'Setup admin page'
