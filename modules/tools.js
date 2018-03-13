@@ -78,7 +78,11 @@ exports.generateMainMenu = function(req, res, next) {
             }]
         }, {
             label: 'Admin',
-            href: '/siteAdmin'
+            href: '/siteAdmin',
+            menuItems: [{
+                label: 'Setup',
+                href: '/siteAdmin/setup'
+            }]
         }, {
             label: 'Page with error',
             href: '/siteAdmin/thisIsNotWorking'
