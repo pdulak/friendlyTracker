@@ -7,6 +7,9 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
+var env = process.env.NODE_ENV || 'dev'
+  , config = require('./config/config.'+env);
+
 var index = require('./routes/index');
 var user = require('./routes/user');
 var siteAdmin = require('./routes/siteAdmin');
@@ -30,6 +33,7 @@ hbs.localsAsTemplateData(app);
 //
 // value to play with on request start and end
 app.set('executionsThisTime', 0);
+app.set('config',config)
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

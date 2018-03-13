@@ -7,10 +7,25 @@ Setup
 Install dependencies by using: **npm install**
 Install nodemon: **npm install -g nodemon**
 
+Configuration
+----------
+Directory 'config' contains global and sample configuration file. You should create
+'config.dev.js' and 'config.prod.js' files respectively using values for your environments.
+
 Running
 ----------
 + Run app with debug by using: **DEBUG=looserTracker:\* npm start**
 + Run app with debug and nodemon using: **DEBUG=looserTracker:\* nodemon ./bin/www**
++ Nodemon should also work this way: **nodemon**
+
+Testing
+----------
++ in the command line enter: **mocha**
+
+Browser
+----------
++ in the browser open the url: **http://localhost:3000/**
+
 
 Things I learned so far:
 ----------

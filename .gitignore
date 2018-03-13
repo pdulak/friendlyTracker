@@ -28,3 +28,7 @@ node_modules
 
 # Debug log from npm
 npm-debug.log
+
+# Real configuration files should not be stored in GIT
+/config/config.dev.js
+/config/config.prod.js
