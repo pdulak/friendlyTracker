@@ -6,6 +6,7 @@ Setup
 ----------
 Install dependencies by using: **npm install**
 Install nodemon: **npm install -g nodemon**
+Install mocha: **npm install --g mocha**
 
 Configuration
 ----------
@@ -29,19 +30,11 @@ Browser
 
 Things I learned so far:
 ----------
-+ basics of Express routing
-+ basics of Express error handling (I was not able to crash an app using stupid errors in my code)
-+ how to reload an application if code changes: **nodemon**
-+ basics of handlebars - usage of variables, each, layouts
-+ basics of PureCSS
-+ request and response objects basics
-+ how to execute code at the start and end of each Request
-+ how to use different layouts in handlebars
-+ how to pass response locals and application locals to handlebars
-+ how to generate menu using module and how to highlight current page using request variables
-+ how to create node module and how function calls works in such module
-+ how to use partials in handlebars and how to call them even recursively
-+ how to test parts of my application using mocha
++ It is not easy to chose technology stack in NodeJS: https://handyman.dulare.com/web-application-node-js-painful-beginning/
++ How Express generator works, how to deal with the start and end of the request: https://handyman.dulare.com/loosertracker-test-project-node-express/
++ Handlebars basics: https://handyman.dulare.com/handlebars-express-basics/
++ How to highlight selected menu item: https://handyman.dulare.com/express-highlight-selected-menu-item/
++ Testing with Mocha and Chai: https://handyman.dulare.com/testing-express-with-mocha-and-chai/
 
 Things to review / read / check:
 ----------
