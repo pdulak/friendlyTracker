@@ -11,7 +11,7 @@ Install mocha: **npm install --g mocha**
 Configuration
 ----------
 Directory 'config' contains global and sample configuration file. You should create
-'config.dev.js' and 'config.prod.js' files respectively using values for your environments.
+'config.development.js' and 'config.prod.js' files respectively using values for your environments.
 
 Running
 ----------
@@ -35,6 +35,8 @@ Things I learned so far:
 + Handlebars basics: https://handyman.dulare.com/handlebars-express-basics/
 + How to highlight selected menu item: https://handyman.dulare.com/express-highlight-selected-menu-item/
 + Testing with Mocha and Chai: https://handyman.dulare.com/testing-express-with-mocha-and-chai/
++ Passing variables through the middleware: https://handyman.dulare.com/passing-variables-through-express-middleware/
++ Multi-level menu creation: https://handyman.dulare.com/multi-level-menu-in-express/
 
 Things to review / read / check:
 ----------
