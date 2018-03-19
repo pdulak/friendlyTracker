@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 
-var env = process.env.NODE_ENV || 'dev'
+var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config.'+env);
 
 var index = require('./routes/index');
@@ -75,7 +75,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
 
 // error handler
 app.use(function(err, req, res, next) {
