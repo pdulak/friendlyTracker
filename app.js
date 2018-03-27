@@ -4,7 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
-var session = require('express-session')
+var session = require('express-session');
+var Sequelize = require('sequelize');
+var SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config.'+env);
@@ -19,15 +21,31 @@ var app = express();
 //
 // Session configuration
 //
+var sequelizeSessionDB = new Sequelize(
+"database",
+"username",
+"password", {
+    "dialect": "sqlite",
+    "storage": "./sqliteDB/sessionStore.sqlite",
+    operatorsAliases: false
+});
+var mySessionStore = new SequelizeStore({
+  db: sequelizeSessionDB
+});
+
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
   secret: config.sessionSecret,
   resave: false,
   saveUninitialized: true,
+  store: mySessionStore,
   cookie: {
      // secure: true // requires HTTPS connection
   }
 }))
+
+// make sure that Session tables are in place
+mySessionStore.sync();
 
 //
 // Handlebars / HBS setup and configuration
