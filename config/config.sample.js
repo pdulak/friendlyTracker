@@ -12,5 +12,15 @@ config.db = {
         operatorsAliases: false
     }
 }
+config.sessionDb = {
+    database: 'null',
+    username: 'null',
+    password: 'null',
+    sequelizeParams: {
+        dialect: 'sqlite',
+        storage: './sqliteDB/sessionStore.sqlite',
+        operatorsAliases: false
+    }
+}
 
 module.exports = config;

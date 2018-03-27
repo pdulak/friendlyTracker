@@ -7,14 +7,7 @@ var env = process.env.NODE_ENV || 'development'
 //
 // Session configuration
 //
-var sequelizeSessionDB = new Sequelize(
-    "database",
-    "username",
-    "password", {
-      "dialect": "sqlite",
-      "storage": "./sqliteDB/sessionStore.sqlite",
-      operatorsAliases: false
-    });
+var sequelizeSessionDB = new Sequelize(config.sessionDb.database, config.sessionDb.username, config.sessionDb.password, config.sessionDb.sequelizeParams);
 
 var mySessionStore = new SequelizeStore({
     db: sequelizeSessionDB
