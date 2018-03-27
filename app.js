@@ -16,9 +16,6 @@ var sessionManagement = require('./modules/sessionManagement');
 
 var app = express();
 
-app.set('trust proxy', 1) // trust first proxy
-app.use(sessionManagement);
-
 //
 // Handlebars / HBS setup and configuration
 //
@@ -45,6 +42,11 @@ app.use(bodyParser.urlencoded({
     extended: false
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// session will not work for static content
+app.set('trust proxy', 1) // trust first proxy
+app.use(sessionManagement);
+
 
 //
 // General toolset

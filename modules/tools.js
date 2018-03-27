@@ -46,8 +46,6 @@ exports.onRequestEnd = function(req, res, next) {
         res.removeListener('close', afterResponse);
 
         console.log('Executed ' + executions + ' times');
-        console.log('This user start date: ' + convertMillisecondsToStringDate(req.session.startDate));
-        console.log('This user last request date: ' + convertMillisecondsToStringDate(req.session.lastRequestDate));
     }
 
     res.on('finish', afterResponse);
@@ -166,9 +164,14 @@ function adjustMenuClass(menuItems, pathname) {
     }
 }
 
-function convertMillisecondsToStringDate(s) {
+/**
+ * Milliseconds conversion.
+ *
+ * @public
+ */
+exports.convertMillisecondsToStringDate = function(s) {
     var d = new Date(s);
-    return d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
-        ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":"
-        + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
+    return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" +
+        ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":" +
+        ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
 }
