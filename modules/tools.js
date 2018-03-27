@@ -24,7 +24,12 @@ var exports = module.exports = {};
 exports.onRequestStart = function(req, res, next) {
     var executions = req.app.get('executionsThisTime');
     req.app.set('executionsThisTime', ++executions);
-
+    if (req.session.startDate) {
+        req.session.lastRequestDate = Date.now();
+    } else {
+        req.session.startDate = Date.now();
+        req.session.lastRequestDate = Date.now();
+    }
     next();
 }
 
@@ -41,6 +46,8 @@ exports.onRequestEnd = function(req, res, next) {
         res.removeListener('close', afterResponse);
 
         console.log('Executed ' + executions + ' times');
+        console.log('This user start date: ' + convertMillisecondsToStringDate(req.session.startDate));
+        console.log('This user last request date: ' + convertMillisecondsToStringDate(req.session.lastRequestDate));
     }
 
     res.on('finish', afterResponse);
@@ -157,4 +164,11 @@ function adjustMenuClass(menuItems, pathname) {
             adjustMenuClass(menuItems[item].menuItems, pathname)
         }
     }
+}
+
+function convertMillisecondsToStringDate(s) {
+    var d = new Date(s);
+    return d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" +
+        ("0" + d.getDate()).slice(-2) + " " + ("0" + d.getHours()).slice(-2) + ":"
+        + ("0" + d.getMinutes()).slice(-2) + ":" + ("0" + d.getSeconds()).slice(-2);
 }

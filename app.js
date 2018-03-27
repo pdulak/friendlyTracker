@@ -2,10 +2,9 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var hbs = require('hbs');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var session = require('express-session')
 
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config.'+env);
@@ -16,6 +15,19 @@ var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 
 var app = express();
+
+//
+// Session configuration
+//
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: config.sessionSecret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+     // secure: true // requires HTTPS connection
+  }
+}))
 
 //
 // Handlebars / HBS setup and configuration
@@ -33,7 +45,7 @@ hbs.localsAsTemplateData(app);
 //
 // value to play with on request start and end
 app.set('executionsThisTime', 0);
-app.set('config',config)
+app.set('config',config);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -42,7 +54,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false
 }));
-app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //
