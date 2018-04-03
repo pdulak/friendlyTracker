@@ -8,7 +8,7 @@ config.db = {
     password: 'null',
     sequelizeParams: {
         dialect: 'sqlite',
-        storage: './sqliteDB/looserTracker.sqlite',
+        storage: './sqliteDB/Tracker.sqlite',
         operatorsAliases: false
     }
 }

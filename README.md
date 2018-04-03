@@ -1,4 +1,4 @@
-# looserTracker
+# friendlyTracker
 
 My first Node.js / Express web application.
 
@@ -15,8 +15,8 @@ Directory 'config' contains global and sample configuration file. You should cre
 
 Running
 ----------
-+ Run app with debug by using: **DEBUG=looserTracker:\* npm start**
-+ Run app with debug and nodemon using: **DEBUG=looserTracker:\* nodemon ./bin/www**
++ Run app with debug by using: **DEBUG=friendlyTracker:\* npm start**
++ Run app with debug and nodemon using: **DEBUG=friendlyTracker:\* nodemon ./bin/www**
 + Nodemon should also work this way: **nodemon**
 
 Testing
@@ -31,7 +31,7 @@ Browser
 Things I learned so far:
 ----------
 + It is not easy to chose technology stack in NodeJS: https://handyman.dulare.com/web-application-node-js-painful-beginning/
-+ How Express generator works, how to deal with the start and end of the request: https://handyman.dulare.com/loosertracker-test-project-node-express/
++ How Express generator works, how to deal with the start and end of the request: https://handyman.dulare.com/friendlytracker-test-project-node-express/
 + Handlebars basics: https://handyman.dulare.com/handlebars-express-basics/
 + How to highlight selected menu item: https://handyman.dulare.com/express-highlight-selected-menu-item/
 + Testing with Mocha and Chai: https://handyman.dulare.com/testing-express-with-mocha-and-chai/
