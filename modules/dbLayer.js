@@ -25,6 +25,26 @@ Object.keys(db).forEach(function(modelName) {
     }
 });
 
+//Sync Database
+sequelize.sync().then(function() {
+    console.log('Nice! Database looks fine');
+    db.dbVersion.findAndCountAll().then(function(data) {
+        if (data.count == 0) {
+            console.log('No data in dbVersion, initializing...');
+            db.dbVersion.create({
+                version: '20180313-01'
+            })
+        } else {
+            console.log('Current database version: ' + data.rows[0].version);
+            if (data.count > 1) {
+                console.log('There are too many records in the dbVersion table!!!');
+            }
+        }
+    });
+}).catch(function(err) {
+    console.log(err, "Something went wrong with the Database Update!");
+});
+
 // exports
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
