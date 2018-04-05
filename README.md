@@ -37,6 +37,8 @@ Things I learned so far:
 + Testing with Mocha and Chai: https://handyman.dulare.com/testing-express-with-mocha-and-chai/
 + Passing variables through the middleware: https://handyman.dulare.com/passing-variables-through-express-middleware/
 + Multi-level menu creation: https://handyman.dulare.com/multi-level-menu-in-express/
++ Handling configuration variables: https://handyman.dulare.com/application-configuration-in-express/
++ Basics of session management: https://handyman.dulare.com/session-management-in-express/
 
 Things to review / read / check:
 ----------
