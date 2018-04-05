@@ -4,6 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
+var passport   = require('passport');
 
 var env = process.env.NODE_ENV || 'development'
   , config = require('./config/config.'+env);
@@ -13,8 +14,24 @@ var user = require('./routes/user');
 var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 var sessionManagement = require('./modules/sessionManagement');
+var dbLayer = require('./modules/dbLayer');
+
+//Sync Database
+dbLayer.sequelize.sync().then(function() {
+
+    console.log('Nice! Database looks fine')
+
+}).catch(function(err) {
+
+    console.log(err, "Something went wrong with the Database Update!")
+
+});
 
 var app = express();
+
+// passport initialization
+app.use(passport.initialize());
+app.use(passport.session())
 
 //
 // Handlebars / HBS setup and configuration

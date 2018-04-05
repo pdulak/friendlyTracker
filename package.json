@@ -7,6 +7,7 @@
     "test": "mocha"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "~1.18.2",
     "connect-session-sequelize": "^5.2.1",
     "cookie-parser": "~1.4.3",
@@ -16,6 +17,8 @@
     "hbs": "~4.0.1",
     "morgan": "~1.9.0",
     "mysql2": "^1.5.2",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^4.36.1",
     "serve-favicon": "~2.4.5",
     "sqlite3": "^3.1.13"
