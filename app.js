@@ -11,6 +11,7 @@ var env = process.env.NODE_ENV || 'development'
 
 var index = require('./routes/index');
 var user = require('./routes/user');
+var login = require('./routes/login');
 var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 var sessionManagement = require('./modules/sessionManagement');
@@ -74,6 +75,7 @@ app.use('/user', function(req, res, next) {
 });
 app.use('/user', user);
 app.use('/siteAdmin', siteAdmin);
+app.use('/login', login);
 
 //
 // error handling

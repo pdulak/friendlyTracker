@@ -94,6 +94,9 @@ exports.generateMainMenu = function(req, res, next) {
         }, {
             label: 'Users',
             href: '/user'
+        }, {
+            label: 'Login',
+            href: '/login'
         }
 
     ]
