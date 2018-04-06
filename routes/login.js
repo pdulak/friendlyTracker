@@ -10,15 +10,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/signup', function(req, res, next){
-    console.log('--------------------------------------');
-    console.log(req.body);
     auth.createUser(req,res,function(data){
         var viewData = {
             title: 'Signup page',
             message: data.message,
         }
-        console.log('Result: ');
-        console.log(data);
         res.render('loginSignup', viewData);
     });
 });

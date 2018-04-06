@@ -15,13 +15,8 @@ var login = require('./routes/login');
 var siteAdmin = require('./routes/siteAdmin');
 var tools = require('./modules/tools');
 var sessionManagement = require('./modules/sessionManagement');
-var dbLayer = require('./modules/dbLayer');
 
 var app = express();
-
-// passport initialization
-app.use(passport.initialize());
-app.use(passport.session())
 
 //
 // Handlebars / HBS setup and configuration
@@ -53,7 +48,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 // session will not work for static content
 app.set('trust proxy', 1) // trust first proxy
 app.use(sessionManagement);
-
+// passport initialization
+app.use(passport.initialize());
+app.use(passport.session())
 
 //
 // General toolset
