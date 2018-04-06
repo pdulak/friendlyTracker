@@ -53,7 +53,7 @@ app.use(sessionManagement);
 auth.initializeStrategy(passport);
 app.use(passport.initialize());
 app.use(passport.session())
-app.set('passport',passport);
+app.set('passport', passport);
 
 //
 // General toolset
@@ -67,15 +67,29 @@ app.use('/user', tools.generateUserMenu);
 
 // authentication
 app.post('/login',
-  passport.authenticate('local', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+    passport.authenticate('local', {
+        failureRedirect: '/login'
+    }),
+    function(req, res) {
+        res.redirect('/user');
+    });
+app.get('/logout',
+    function(req, res) {
+        req.logout();
+        res.redirect('/');
+    });
 
 //
 // routing
 //
 app.use('/', index);
+app.use('/user', function(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    } else {
+        res.redirect('/login?m=not-logged-in');
+    }
+});
 app.use('/user', function(req, res, next) {
     res.locals.layout = 'layout_user';
     next();

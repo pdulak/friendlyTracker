@@ -3,9 +3,13 @@ var Strategy = require('passport-local').Strategy;
 var dbLayer = require('../modules/dbLayer');
 var auth = {};
 
-generateHash = function(password) {
+function generateHash(password) {
     return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 };
+
+function isValidPassword(userpass, password) {
+    return bCrypt.compareSync(password, userpass);
+}
 
 auth.initializeStrategy = function(passport) {
     passport.use('local', new Strategy({
@@ -14,21 +18,27 @@ auth.initializeStrategy = function(passport) {
             passReqToCallback: true
         },
         function(req, email, password, cb) {
-            console.log(req);
-            console.log('--------------------------');
-            console.log('Received email: ' + email);
-            console.log('Received password: ' + password);
             dbLayer.user.findOne({
                 where: {
                     email: email
                 }
             }).then(function(user) {
-                if (user) {
-                    // check password
-                    return cb(null, user);
-                } else {
+                if (!user) {
                     return cb(null, false);
                 }
+                if (!isValidPassword(user.password, password)) {
+                    return cb(null, false);
+                }
+
+                var userinfo = user.get();
+                user.update({
+                    last_login: Date.now()
+                })
+                return cb(null, userinfo);
+
+            }).catch(function(err) {
+                console.log("Error:", err);
+                return cb(null, false);
             });
         }));
 
