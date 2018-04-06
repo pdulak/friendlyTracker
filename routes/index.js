@@ -14,13 +14,7 @@ router.get('/about', function(req, res, next) {
         testVariable: 'User Agent: ' + req.headers['user-agent'],
         title: 'About us page'
     };
-    req.zzzpdulakData = {
-        testValue : true,
-        testVal : false,
-    }
-    // console.log(req);
     res.render('about', viewData);
-    // console.log(res);
 });
 
 module.exports = router;

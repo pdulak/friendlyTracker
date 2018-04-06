@@ -1,1 +1,7 @@
 <p>{{ adminContents }}</p>
+
+<ul>
+{{#each users}}
+    <li>{{ firstname }}; {{ lastname }}; {{ email }}; {{ password }}
+{{/each}}
+</ul>
