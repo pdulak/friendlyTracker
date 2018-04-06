@@ -5,6 +5,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var passport = require('passport');
+var auth = require('./modules/auth.js');
 
 var env = process.env.NODE_ENV || 'development',
     config = require('./config/config.' + env);
@@ -49,8 +50,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', 1) // trust first proxy
 app.use(sessionManagement);
 // passport initialization
+auth.initializeStrategy(passport);
 app.use(passport.initialize());
 app.use(passport.session())
+app.set('passport',passport);
 
 //
 // General toolset
@@ -61,6 +64,13 @@ app.use(tools.onRequestEnd);
 // generate menu of the application
 app.use(tools.generateMainMenu);
 app.use('/user', tools.generateUserMenu);
+
+// authentication
+app.post('/login',
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+  });
 
 //
 // routing
