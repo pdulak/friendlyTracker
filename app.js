@@ -4,10 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var hbs = require('hbs');
-var passport   = require('passport');
+var passport = require('passport');
 
-var env = process.env.NODE_ENV || 'development'
-  , config = require('./config/config.'+env);
+var env = process.env.NODE_ENV || 'development',
+    config = require('./config/config.' + env);
 
 var index = require('./routes/index');
 var user = require('./routes/user');
@@ -39,7 +39,7 @@ hbs.localsAsTemplateData(app);
 //
 // value to play with on request start and end
 app.set('executionsThisTime', 0);
-app.set('config',config);
+app.set('config', config);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

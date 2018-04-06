@@ -17,16 +17,4 @@ router.get('/setup', function(req, res, next) {
     res.render('adminSetup', viewData);
 });
 
-
-
-router.get('/thisIsNotWorking', function(req, res, next) {
-    var a;
-    a = b;
-    var viewData = {
-        title: 'Error admin page',
-        adminContents: 'This is error admin page'
-    }
-    res.render('adminMain', viewData);
-});
-
 module.exports = router;

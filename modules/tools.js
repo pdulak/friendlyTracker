@@ -67,20 +67,13 @@ exports.generateMainMenu = function(req, res, next) {
         }, {
             label: 'About Us',
             href: '/about',
-            menuItems: [{
-                label: 'About our staff',
-                href: '/aboutstaff',
-                menuItems: [{
-                    label: 'CEO',
-                    href: '/aboutCEO'
-                }, {
-                    label: 'Link to Google',
-                    href: 'https://google.com/'
-                }]
-            }, {
-                label: 'About our building',
-                href: '/aboutbuilding'
-            }]
+            // menuItems: [{
+            //     label: 'About our staff',
+            //     href: '/aboutstaff'
+            // }, {
+            //     label: 'About our building',
+            //     href: '/aboutbuilding'
+            // }]
         }, {
             label: 'Admin',
             href: '/siteAdmin',
@@ -88,9 +81,6 @@ exports.generateMainMenu = function(req, res, next) {
                 label: 'Setup',
                 href: '/siteAdmin/setup'
             }]
-        }, {
-            label: 'Page with error',
-            href: '/siteAdmin/thisIsNotWorking'
         }, {
             label: 'Users',
             href: '/user'
@@ -117,21 +107,8 @@ exports.generateUserMenu = function(req, res, next) {
             href: '/'
         }, {
             label: 'My profile',
-            href: '/user',
-            menuItems: [{
-                    label: 'My Address',
-                    href: '/user/address'
-                },
-                {
-                    label: 'My Billing Info',
-                    href: '/user/billingInfo'
-                }
-            ]
-        }, {
-            label: 'Empty',
-            href: '#'
+            href: '/user'
         }
-
     ]
     adjustMenuClass(menuItems, req._parsedUrl.pathname);
     res.locals.menuItems = menuItems;

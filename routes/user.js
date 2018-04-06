@@ -13,12 +13,4 @@ router.get('/', function(req, res, next) {
     res.render('userMain', viewData);
 });
 
-router.get('/address', function(req,res,next) {
-    res.render('userAddress');
-})
-
-router.get('/billingInfo', function(req,res,next) {
-    res.render('userBilling');
-})
-
 module.exports = router;

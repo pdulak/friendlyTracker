@@ -103,7 +103,8 @@ describe('/modules/tools.js ', function() {
                         this[nameOfVariable] = valueOfVariable;
                     },
                     executionsThisTime: 4
-                }
+                },
+                session: {}
             });
             var res = httpMocks.createResponse();
             var next = function() {};
